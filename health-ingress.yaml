@@ -1,0 +1,9 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: health-ingress
+spec:
+  backend:
+    serviceName: health-v1
+    servicePort: 8000
+

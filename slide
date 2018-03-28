@@ -1,0 +1,88 @@
+export GOPATH=$(pwd)
+GOOS=linux go build
+docker build . -t health:v1
+
+
+minikube start
+minikube service health-v1
+minikube ip
+minikube dashboard
+
+Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications.
+
+
+Mostly taken from kubernetes.io
+
+What problems does Kubernetes solve:
+- on which hardware does a service run
+- runs on multiple cloud platforms: GCE, GKE, AWS, Azure, ...
+https://docs.google.com/presentation/d/10hGSmuNo6vWuHK4Ja6r4Vy9XOCKLfDbo7dzzgVYQ_p8/edit#slide=id.g13b0511dc6_1_0
+
+Abstracts from Hardware
+Automatically places containers based on their resource requirements and other constraints, while not sacrificing availability. Mix critical and best-effort workloads in order to drive up utilization and save even more resources.
+
+Self-healing
+Restarts containers that fail, replaces and reschedules containers when nodes die, kills containers that don't respond to your user-defined health check, and doesn't advertise them to clients until they are ready to serve.
+
+Horizontal scaling
+Scale your application up and down with a simple command, with a UI, or automatically based on CPU usage.
+
+Service discovery and load balancing
+No need to modify your application to use an unfamiliar service discovery mechanism. Kubernetes gives containers their own IP addresses and a single DNS name for a set of containers, and can load-balance across them.
+
+Automated rollouts and rollbacks
+Kubernetes progressively rolls out changes to your application or its configuration, while monitoring application health to ensure it doesn't kill all your instances at the same time. If something goes wrong, Kubernetes will rollback the change for you. Take advantage of a growing ecosystem of deployment solutions.
+
+Secret and configuration management
+Deploy and update secrets and application configuration without rebuilding your image and without exposing secrets in your stack configuration.
+
+Storage orchestration
+Automatically mount the storage system of your choice, whether from local storage, a public cloud provider such as GCP or AWS, or a network storage system such as NFS, iSCSI, Gluster, Ceph, Cinder, or Flocker.
+
+Batch execution
+In addition to services, Kubernetes can manage your batch and CI workloads, replacing containers that fail, if desired.
+
+
+
+- deployment
+- service discovery
+- load balancing & auto scaling
+- restarts
+- monitoring (readiness & liveness probes)
+- resource
+
+Basic building blocks:
+- Pod
+- Deployment (rolling updates)
+- Service
+
+Services:
+1: watch curl loop showing that we get all instances
+2: log into pod, curl $HOSTNAME/health, curl health-v1:8000/health
+5: Poison some, show that they don't receive traffic - log into pod, show that it is still around.
+6: Redeploy with liveness probe
+5: Poison some, show that they are restarted
+
+
+Other features:
+- ConfigMap
+- Job
+- DaemonSet
+- Ingress
+
+Advanced features:
+- Labels, Selectors
+- Namespaces
+
+
+CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main
+
+docker build -t gcr.io/kubernetes-playground-1207/health:V1 .
+gcloud docker -- push gcr.io/kubernetes-playground-1207/health:V1
+
+while true; do  curl 104.155.119.23:30001 --connect-timeout 10 -w %{time_connect}:%{time_starttransfer}:%{time_total}; sleep 0.5; done
+
+watch -n 1 -- kubectl get pods
+
+
+kubectl autoscale rc health-v1 --min=1 --max=5 --cpu-percent=80

@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: health-v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+        name: health
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        name: health
+        app: health
+        version: v1
+    spec:
+      containers:
+        - image: health:v1
+          env:
+            - name: SLEEP
+              value:  "0"
+          name: health
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 1 
+            periodSeconds: 1
+            timeoutSeconds: 1
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            timeoutSeconds: 1
