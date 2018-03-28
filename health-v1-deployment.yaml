@@ -20,10 +20,10 @@ spec:
         version: v1
     spec:
       containers:
-        - image: health:v1
+        - image: gcr.io/fdc-test-statistic/health:1
           env:
             - name: SLEEP
-              value:  "0"
+              value:  "5"
           name: health
           ports:
             - containerPort: 8000
@@ -33,7 +33,7 @@ spec:
             httpGet:
               path: /health
               port: 8000
-            initialDelaySeconds: 1 
+            initialDelaySeconds: 1
             periodSeconds: 1
             timeoutSeconds: 1
 

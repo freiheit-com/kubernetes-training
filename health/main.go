@@ -12,6 +12,10 @@ import (
 )
 
 func main() {
+
+	secret := os.Getenv("SECRET")
+	fmt.Printf("Got Secret: %s (but please don't tell anyone)\n\n", secret)
+
 	sleep(os.Getenv("SLEEP"))
 	app := gin.Default()
 	app.GET("/kill", kill)

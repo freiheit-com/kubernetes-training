@@ -1,0 +1,37 @@
+# Look around fresh cluster
+- kubectl get nodes
+- kubectl describe node xxx
+
+# deploy service as a single pod
+- introduce health toy service
+- go through pod.yaml file
+- port forward to pod and talk with it
+- poison, cure pod => nothing happens, because we did not tell Kubernetes to monitor!
+
+# deploy service as deployment with replica set
+- introduce deployment and replica set
+- create bare-deployment and watch pods coming up
+- port-forward to pod and inspect HOSTNAME
+- re-deploy deployment
+
+# deploy service with readiness and liveness
+- go through health-v1-deployment.yaml (liveness/readiness)
+- /poison pod
+=> and watch behaviour of pod
+
+# deploy limits
+- /burn pod
+- /allocMem pod (to develop)
+
+# deploy with secret
+- health-v1-deployment-with-secret.yaml and
+
+# deploy exposed service for deployment
+- connect to service and watch load-balancing!
+
+
+
+# explain only AutoScale, Daemon, Ingress, Job
+
+# explain in sample cluster:
+- config maps (like secrets)
