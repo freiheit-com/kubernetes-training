@@ -5,6 +5,6 @@ export VERSION=2
 
 ./build.sh
 
-docker build -t gcr.io/$REG_NAME/health:"$VERSION" .
+docker build -t ragnaroek/health:"$VERSION" .
 
-gcloud docker -- push gcr.io/$REG_NAME/health:"$VERSION"
+docker push ragnaroek/health:"$VERSION"

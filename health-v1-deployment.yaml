@@ -20,7 +20,7 @@ spec:
         version: v1
     spec:
       containers:
-        - image: gcr.io/fdc-test-statistic/health:1
+        - image: ragnaroek/health:2
           env:
             - name: SLEEP
               value:  "5"
