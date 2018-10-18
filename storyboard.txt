@@ -8,16 +8,16 @@
 - port forward to pod and talk with it
 - poison, cure pod => nothing happens, because we did not tell Kubernetes to monitor!
 
+# deploy service with readiness and liveness
+- go through health-v1-deployment.yaml (liveness/readiness)
+- /poison pod
+=> and watch behaviour of pod
+
 # deploy service as deployment with replica set
 - introduce deployment and replica set
 - create bare-deployment and watch pods coming up
 - port-forward to pod and inspect HOSTNAME
 - re-deploy deployment
-
-# deploy service with readiness and liveness
-- go through health-v1-deployment.yaml (liveness/readiness)
-- /poison pod
-=> and watch behaviour of pod
 
 # deploy limits
 - /burn pod
