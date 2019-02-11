@@ -1,3 +1,5 @@
+## Basics
+
 # Look around fresh cluster
 - kubectl get nodes
 - kubectl describe node xxx
@@ -9,6 +11,8 @@
 - poison, cure pod => nothing happens, because we did not tell Kubernetes to monitor!
 
 # deploy service with readiness and liveness
+=> readiness = when to start directing requests at pod!
+=> liveness = still running? kill if not
 - go through health-v1-deployment.yaml (liveness/readiness)
 - /poison pod
 => and watch behaviour of pod
@@ -19,19 +23,25 @@
 - port-forward to pod and inspect HOSTNAME
 - re-deploy deployment
 
-# deploy limits
-- /burn pod
-- /allocMem pod (to develop)
-
-# deploy with secret
-- health-v1-deployment-with-secret.yaml and
-
 # deploy exposed service for deployment
 - connect to service and watch load-balancing!
 
 
+## Kubernetes concepts
 
-# explain only AutoScale, Daemon, Ingress, Job
+# limits
+- requests (initial)
+- limits
+
+# deploy with secret
+- health-v1-deployment-with-secret.yaml and
+
+# sealedsecrets
+- end up as "normal" Kubernetes sealedsecretes
+- can be checked in in repos
+- show example from project
 
 # explain in sample cluster:
 - config maps (like secrets)
+
+# explain only AutoScale, Daemon, Ingress, Job (CronJob)
