@@ -44,3 +44,11 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 2
             timeoutSeconds: 1
+
+          resources:
+            limits:
+              cpu: 75m
+              memory: 100Mi
+            requests:
+              cpu: 50m
+              memory: 50Mi
