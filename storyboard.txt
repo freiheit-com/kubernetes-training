@@ -26,7 +26,20 @@
 
 # deploy exposed service for deployment
 - connect to service and watch load-balancing!
+- explain DNS
 - if service type is ClusterIP use kubectl proxy for demo: 'http://localhost:8001/api/v1/namespaces/training/services/health-v1/proxy/health'
+
+# explain configmaps, env vars, secrets, volumes
+- configmap -> not encrypted, also used for files
+- secret -> base64 encoded data
+- use in deployments
+- volumes -> integration with many cloud resources
+
+# questions
+- How does your team deploy to kubernetes? (spinnaker, manually, jenins jobs)
+- Which resource does your team use? (replicaset, deployment)
+- How does your team manage config?
+- Advances: Does your team use istio?
 
 
 ## Kubernetes concepts
